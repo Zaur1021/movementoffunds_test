@@ -1,0 +1,20 @@
+{% extends 'main/bp.html' %} 
+{% load static %} 
+{% block link_style %}
+<link
+  rel="stylesheet"
+  href='{% static "main/records.css" %}'
+/>
+{% endblock %}
+{% block title %} MOF {% endblock %} 
+
+ {% block content %}
+    <div class="records">
+        <p>Дата</p>
+        <p>Статус</p>
+        <p>Тип</p>
+        <p>Категория</p>
+        <p>Сумма</p>
+        <p>Комментарий</p>
+    </div>
+{% endblock %}

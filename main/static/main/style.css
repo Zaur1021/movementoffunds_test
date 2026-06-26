@@ -1,0 +1,73 @@
+/* Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+/* Reset */
+
+body {
+  width: 60%;
+  margin: 0 auto;
+  font-family: "Inter", sans-serif;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.4rem;
+  margin-top: 0.4rem;
+  border-bottom: black 1px solid;
+}
+
+.nav div {
+  display: flex;
+  gap: 1.4rem;
+}

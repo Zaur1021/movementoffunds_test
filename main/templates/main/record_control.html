@@ -1,0 +1,14 @@
+{% extends "main/bp.html"%}
+{% load static %}
+{% block link_style%} <link rel="stylesheet" href="{% static 'main/record_control.css'%}"/> {% endblock%}
+{% block title %}
+Управление записями
+{%endblock%}
+
+{% block content%}
+    <form method="POST" class='form'>
+        {% csrf_token %}
+        {{ form.date }}
+        <button type="submit" class="btn btn-primary mt-3">Отправить</button>
+    </form>
+{% endblock %}
