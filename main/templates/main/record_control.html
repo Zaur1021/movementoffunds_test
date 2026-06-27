@@ -8,7 +8,35 @@
 {% block content%}
     <form method="POST" class='form'>
         {% csrf_token %}
-        {{ form.date }}
-        <button type="submit" class="btn btn-primary mt-3">Отправить</button>
+        <h2 class="form__title">Создать запись</h2>
+        <div class="form__box">
+            <label class="form__label">Дата</label>
+            {{ form.date }}
+        </div>
+        <div class="form__box">
+            <label class="form__label">Статус</label>
+            {{ form.status }}
+        </div>
+        <div class="form__box">
+            <label class="form__label">Тип</label>
+            {{ form.type }}
+        </div>
+        <div class="form__box">
+            <label class="form__label">Категория</label>
+            {{ form.category }}
+        </div>
+        <div class="form__box">
+            <label class="form__label">Подкатегория</label>
+            {{ form.subcategory }}
+        </div>
+        <div class="form__box">
+            <label class="form__label">Сумма</label>
+            {{ form.sum }}
+        </div>
+        <div class="form__box">
+            <label class="form__label">Комментарий</label>
+            {{ form.comment }}
+        </div>
+        <button type="submit" class="form__button">Отправить</button>
     </form>
 {% endblock %}

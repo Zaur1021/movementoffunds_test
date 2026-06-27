@@ -1,5 +1,15 @@
 {% extends 'main/bp.html '%}
 
 {% block title %}
-Управление справочниками
+    Управление справочниками
+{% endblock %}
+
+{% block content%}
+
+    <form method="POST">
+        <h2>Создать тип</h2>
+        {% csrf_token %}
+        <div>{{ type_form.name }}</div>
+        <button type="submit" name="add_type">Добавить</button>
+    </form>
 {% endblock %}

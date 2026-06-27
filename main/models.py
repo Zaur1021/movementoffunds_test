@@ -1,12 +1,31 @@
 from django.db import models
 
 # Create your models here.
+class Type(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    type = models.ForeignKey(Type,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+class Subcategory(models.Model):
+    name = models.CharField(max_length=100)
+    category = models.ForeignKey(Category,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
+
 class Record(models.Model):
     date = models.DateField(blank=True, null=True)
     status = models.CharField(max_length=100, blank=True, null=True)
-    type = models.CharField(max_length=100)
-    category = models.CharField(max_length=100)
-    subcategory = models.CharField(max_length=100)
+    type = models.ForeignKey(Type,on_delete=models.SET_NULL,null=True)
+    category = models.ForeignKey(Category,on_delete=models.SET_NULL,null=True)
+    subcategory = models.ForeignKey(Subcategory,on_delete=models.SET_NULL,null=True)
     sum = models.CharField(max_length=100)
     comment = models.CharField(max_length=100, blank=True, null=True)
 

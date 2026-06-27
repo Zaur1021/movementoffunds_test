@@ -1,4 +1,23 @@
 .form {
   margin-left: 4rem;
   margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 45%;
+}
+.form__title {
+  text-align: center;
+}
+
+.form__box input,
+.form__box select,
+.form__box textarea {
+  border: 1px solid #727272;
+  font-size: 0.9rem;
+}
+.form__box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }
