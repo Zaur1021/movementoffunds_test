@@ -1,15 +1,89 @@
 {% extends 'main/bp.html '%}
+{% load static %}
+{% block link_style%} <link rel="stylesheet" href="{% static 'main/catalog_control.css'%}"/> {% endblock%}
 
 {% block title %}
     Управление справочниками
 {% endblock %}
 
 {% block content%}
+    <div class="container">
+        <section class="section">
+            <form method="POST" class="section__form">
+                <h2 class="section__title">Создать тип</h2>
+                {% csrf_token %}
+                <div>{{ type_form.name }}</div>
+                <button type="submit" name="add_type" class="section__button">Добавить</button>
+            </form>
 
-    <form method="POST">
-        <h2>Создать тип</h2>
-        {% csrf_token %}
-        <div>{{ type_form.name }}</div>
-        <button type="submit" name="add_type">Добавить</button>
-    </form>
+            <div class="section__list">
+                <h2 class="section__title">Список типов</h2>
+
+                    {% for type in types%}
+                        <div class="section__list-element">
+                            <div class="section__list-element-title">{{ type.name }}</div>
+                            <div>
+                                <a href="{% url "type_edit" type.id %}" class="section__edit-button">Редактировать</a>
+                                <form method="POST" action="{% url 'type_delete' type.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="section__button">Удалить</button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+            </div>
+        </section>
+        <section class="section">
+            <form method="POST" class="section__form">
+                <h2 class="section__title">Создать категорию</h2>
+                {% csrf_token %}
+                <div>{{ category_form.name }}</div>
+                <div>{{ category_form.type }}</div>
+
+                <button type="submit" name="add_category" class="section__button">Добавить</button>
+            </form>
+
+            <div class="section__category-list">
+                <h2 class="section__title">Список категорий</h2>
+                {% for category in categories%}
+                    <div class="section__list-element">
+                        <div class="section__list-element-category-title">{{ category.name }} / {{category.type}}</div>
+                        <div>
+                            <a href="{% url "category_edit" category.id %}" class="section__edit-button">Редактировать</a>
+                            <form method="POST" action="{% url 'category_delete' category.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="section__button">Удалить</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+        <section class="section">
+            <form method="POST" class="section__form">
+                <h2 class="section__title">Создать подкатегорию</h2>
+                {% csrf_token %}
+                <div>{{ subcategory_form.name }}</div>
+                <div>{{ subcategory_form.category }}</div>
+
+                <button type="submit" name="add_subcategory" class="section__button">Добавить</button>
+            </form>
+
+            <div class="section__category-list">
+                <h2 class="section__title">Список подкатегорий</h2>
+                {% for subcategory in subcategories%}
+                    <div class="section__list-element">
+                        <div class="section__list-element-category-title">{{ subcategory.name }} / {{subcategory.category}}</div>
+                        <div>
+                            <a href="{% url "subcategory_edit" subcategory.id %}" class="section__edit-button">Редактировать</a>
+                            <form method="POST" action="{% url 'subcategory_delete' subcategory.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="section__button">Удалить</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
 {% endblock %}

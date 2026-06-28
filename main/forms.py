@@ -12,7 +12,7 @@ class CategoryForm(forms.ModelForm):
         model = Category
         fields = ["name",'type']
         widgets = {
-            "name" : forms.TextInput(attrs={'placeholder':'Введите новую категорию'}),
+            "name" : forms.TextInput(attrs={'placeholder':'Введите категорию'}),
             'type' : forms.Select()
         }
 
@@ -21,13 +21,13 @@ class SubcategoryForm(forms.ModelForm):
         model = Subcategory
         fields = ['name','category']
         widgets = {
-            "name" : forms.TextInput(attrs={'placeholder':'Введите новую подкатегорию'}),
+            "name" : forms.TextInput(attrs={'placeholder':'Введите подкатегорию'}),
             'category' : forms.Select()
         }
 class RecordForm(forms.ModelForm):
     class Meta:
         model = Record
-        fields = ['date', 'status','sum','comment']
+        fields = ['date', 'status','type','category','subcategory','sum','comment']
         widgets = {
             'date': forms.DateInput(attrs={'type': 'date'}),
             'sum': forms.NumberInput(attrs={'placeholder': '0.00'}),

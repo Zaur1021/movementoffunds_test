@@ -1,0 +1,19 @@
+{% extends "main/bp.html" %}
+{% load static %}
+{% block link_style%} <link rel="stylesheet" href="{% static 'main/catalog_control__edit-type.css'%}"/> {% endblock%}
+
+{% block title %}
+Редактировать тэг
+{% endblock %}
+    
+{% block content%}
+<form method="POST" class='form'>
+        <h2 class="form__title">Редактировать тип</h2>
+        {% csrf_token %}
+        {{ form.name }}
+        <div class="form__box">
+            <button type="submit">Сохранить</button>
+            <a href="{% url 'catalog_control' %}">Назад</a>
+        </div>
+    </form>
+{% endblock%}
