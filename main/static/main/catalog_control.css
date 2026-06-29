@@ -1,6 +1,6 @@
 .container {
-    display: flex;
-    justify-content: space-around;
+   display: grid;
+   grid-template-columns: 1fr 1fr;
 }
 
 .section {
@@ -8,9 +8,8 @@
     flex-direction: column;
     gap: 3rem;
     align-items: center;
-    margin-top: 5rem;
+    margin-top: 2rem;
 }
-
 .section input,select {
     border:black 1px solid;
     width: 100% ;
@@ -39,12 +38,16 @@
     display: flex;
     gap: 0.5rem;
     flex-direction: column;
+    height: 250px;
+    overflow-y: auto;
 }
 .section__category-list {
     display: flex;
     gap: 0.5rem;
     flex-direction: column;
     margin-top: -1.3rem;
+    max-height: 250px;
+    overflow-y: auto;
 }
 .section__list-element {
     display: flex;

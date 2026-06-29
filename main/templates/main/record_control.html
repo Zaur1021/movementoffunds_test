@@ -6,37 +6,106 @@
 {%endblock%}
 
 {% block content%}
-    <form method="POST" class='form'>
-        {% csrf_token %}
-        <h2 class="form__title">Создать запись</h2>
-        <div class="form__box">
-            <label class="form__label">Дата</label>
-            {{ form.date }}
+    <div class='container'>
+        <div class="create_record">
+            <form method="POST" class='form'>
+                <div class='create_record__wrapper'>
+                    {% csrf_token %}
+                    <h2 class="form__title">Создать запись</h2>
+                    <div class="form__box">
+                        <label class="form__label">Дата</label>
+                        {{ form.date }}
+                    </div>
+                    <div class="form__box">
+                        <label class="form__label">Статус</label>
+                        {{ form.status }}
+                    </div>
+                    <div class="form__box">
+                        <label class="form__label">Тип</label>
+                        {{ form.type }}
+                    </div>
+                    <div class="form__box" >
+                        <label class="form__label">Категория</label>
+                        {{ form.category }}
+                    </div>
+                    <div class="form__box">
+                        <label class="form__label">Подкатегория</label>
+                        {{ form.subcategory }}
+                    </div>
+                    <div class="form__box">
+                        <label class="form__label">Сумма</label>
+                        {{ form.sum }}
+                    </div>
+                    <div class="form__box">
+                        <label class="form__label">Комментарий</label>
+                        {{ form.comment }}
+                    </div>
+                    <button type="submit" class="form__button">Отправить</button>
+                </div>
+            </form>
         </div>
-        <div class="form__box">
-            <label class="form__label">Статус</label>
-            {{ form.status }}
+        <div class="records">
+            <h2 class="records__title">Список записей</h2>
+
+            <div class="records__list">
+                {% for record in records %}
+                    <div class="records__item">
+                        <div class="records__info">
+                            {{ record.date }} - {{ record.status}} - {{ record.sum }}
+                        </div>
+
+                        <div class="records__actions">
+                            <a href="{% url 'record_edit' record.id %}" class="button">
+                                Редактировать
+                            </a>
+
+                            <form method="POST" action="{% url 'record_delete' record.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="button">
+                                    Удалить
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-        <div class="form__box">
-            <label class="form__label">Тип</label>
-            {{ form.type }}
-        </div>
-        <div class="form__box">
-            <label class="form__label">Категория</label>
-            {{ form.category }}
-        </div>
-        <div class="form__box">
-            <label class="form__label">Подкатегория</label>
-            {{ form.subcategory }}
-        </div>
-        <div class="form__box">
-            <label class="form__label">Сумма</label>
-            {{ form.sum }}
-        </div>
-        <div class="form__box">
-            <label class="form__label">Комментарий</label>
-            {{ form.comment }}
-        </div>
-        <button type="submit" class="form__button">Отправить</button>
-    </form>
+    </div>
+    <script>
+        const categories = {{ categories_json|safe}}
+        const subcategories = {{ subcategories_json|safe}}
+        const typesTag = document.getElementById('id_type');
+        const categoriesTag = document.getElementById('id_category');
+        const subcategoriesTag = document.getElementById('id_subcategory')
+        categoriesTag.innerHTML = "<option value>------</option >";
+        subcategoriesTag.innerHTML = "<option value>------</option >"; 
+        typesTag.addEventListener('change',function() {
+            categoriesTag.innerHTML = "<option value>------</option >";
+            subcategoriesTag.innerHTML = "<option value>------</option >";
+
+            const typeId  =  parseInt(typesTag.value)
+            categories
+                .filter(categ => categ.type_id === typeId)
+                .forEach(categ => {
+                    const option = document.createElement('option');
+                    option.value = categ.id;
+                    option.textContent = categ.name;
+                    categoriesTag.appendChild(option);
+                    });
+                })
+        categoriesTag.addEventListener('change',function() {
+            const categoryId  =  parseInt(categoriesTag.value)
+            subcategoriesTag.innerHTML = "<option value>------</option >";
+            
+
+            subcategories
+                .filter(subcateg => subcateg.category_id === categoryId)
+                .forEach(subcateg => {
+                    const option = document.createElement('option');
+                    option.value = subcateg.id;
+                    option.textContent = subcateg.name;
+                    subcategoriesTag.appendChild(option);
+                    });
+                })
+    </script>
 {% endblock %}

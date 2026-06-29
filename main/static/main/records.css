@@ -1,6 +1,61 @@
 .records {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  margin-top: 3rem;
-  margin-left: 1rem;
+    width: 100%;
+    background: #d4d4d4;
+    overflow: hidden;
+    margin-top: 2rem;
+}
+
+.records__header,
+.records__row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr) 180px;
+    gap: 10px;
+    align-items: center;
+}
+
+
+
+.records__header {
+    background: #bdbdbd;
+    font-weight: bold;
+}
+
+.records__row {
+    background: white;
+    border-top: 1px solid #ddd;
+}
+
+.records__row:nth-child(even) {
+    background: #f8f8f8;
+}
+.records__actions {
+    margin-left: -0.6rem;
+    display: flex;
+    gap: 2px;
+}
+
+.records__actions form {
+    margin: 0;
+}
+
+.button {
+    border: black 1px solid;
+    text-decoration: none;
+    cursor: pointer;
+}
+.filters {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.filters select,
+.filters input {
+    padding: 8px;
+}
+
+.filters button,
+.filters a {
+    padding: 8px 14px;
 }

@@ -1,23 +1,104 @@
-.form {
-  margin-left: 4rem;
-  margin-top: 2rem;
+.container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.create_record__wrapper {
+  
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
-  width: 45%;
+  align-items: center;
+  margin: 0 auto;
+  width: 50%;
+  gap: 1rem;
 }
 .form__title {
+  margin-top: 1rem;
   text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 
 .form__box input,
 .form__box select,
 .form__box textarea {
-  border: 1px solid #727272;
+  border: 1px solid black;
   font-size: 0.9rem;
+  width: 25rem;
+}
+.form__button {
+  border: black 1px solid;
+  width: 25rem;
+  background-color: #bdbdbd;
+}
+.form__box :disabled {
+  border:0.5px solid rgb(117, 117, 117)
 }
 .form__box {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+}
+
+.records__title {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.records_item {
+  display: flex;
+  gap: 0.5rem;
+  width: 10rem;
+
+}
+.button {
+  border: black 1px solid;
+   border: black 1px solid;
+   padding: 0.2rem;
+  background-color: #bdbdbd;
+}
+.records {
+    padding: 20px;
+     max-height: 500px;
+   
+}
+.records__title {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.records__list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+   overflow-y: auto;
+   height: 450px;
+    width: 650px;
+
+}
+
+.records__item {
+    padding: 15px 20px;
+    border-radius: 8px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.records__info {
+    font-size: 16px;
+    margin-right: 20px;
+}
+
+.records__actions {
+    display: flex;
+    gap: 10px;
+}
+
+.records__actions form {
+    margin: 0;
+}
+
+.records__item:nth-child(odd) {
+    background-color: #9f9f9f;
 }

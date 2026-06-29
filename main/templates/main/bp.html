@@ -11,13 +11,15 @@
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
-    <nav class="nav">
-    <a href="{% url 'records'%}" class="nav__link">Записи</a>
-    <div>
-      <a href='{% url 'record_control' %}' class="nav__link">Управление записями</a>
-      <a href='{% url 'catalog_control' %}' class="nav__link">Управление справочниками</a>
+    <div class="main_____container">
+      <nav class="nav">
+      <a href="{% url 'records'%}" class="nav__link">Записи</a>
+      <div>
+        <a href='{% url 'record_control' %}' class="nav__link">Управление записями</a>
+        <a href='{% url 'catalog_control' %}' class="nav__link">Управление справочниками</a>
+      </div>
+      </nav>
+      {% block content %} {% endblock %}
     </div>
-  </nav>
-    {% block content %} {% endblock %}
   </body>
 </html>

@@ -58,13 +58,11 @@ legend {
     padding: 0;
 }
 /* Reset */
-
-body {
-  width: 60%;
-  margin: 0 auto;
-  font-family: "Inter", sans-serif;
+.main_____container {
+    width: 70%;
+    margin: 0 auto;
+    font-family: 'Inter',sans-serif;
 }
-
 .nav {
   display: flex;
   justify-content: space-around;

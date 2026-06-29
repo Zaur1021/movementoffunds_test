@@ -1,20 +1,96 @@
-{% extends 'main/bp.html' %} 
-{% load static %} 
-{% block link_style %}
-<link
-  rel="stylesheet"
-  href='{% static "main/records.css" %}'
-/>
-{% endblock %}
-{% block title %} MOF {% endblock %} 
+{% extends 'main/bp.html' %}
+{% load static %}
 
- {% block content %}
+{% block link_style %}
+<link rel="stylesheet" href="{% static 'main/records.css' %}">
+{% endblock %}
+
+{% block title %}MOF{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form method="GET" class="filters">
+
+    <input
+        type="date"
+        name="date"
+        value="{{ request.GET.date }}"
+    >
+
+    <select name="status">
+        <option value="">Все статусы</option>
+        {% for status in statuses %}
+            <option
+                value="{{ status.id }}"
+                {% if request.GET.status == status.id|stringformat:"s" %}selected{% endif %}
+            >
+                {{ status.name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <select name="category">
+        <option value="">Все категории</option>
+        {% for category in categories %}
+            <option
+                value="{{ category.id }}"
+                {% if request.GET.category == category.id|stringformat:"s" %}selected{% endif %}
+            >
+                {{ category.name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <select name="subcategory">
+        <option value="">Все подкатегории</option>
+        {% for subcategory in subcategories %}
+            <option
+                value="{{ subcategory.id }}"
+                {% if request.GET.subcategory == subcategory.id|stringformat:"s" %}selected{% endif %}
+            >
+                {{ subcategory.name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">
+        Фильтровать
+    </button>
+
+    <a href="{% url 'records' %}">
+        Сбросить
+    </a>
+
+</form>
     <div class="records">
-        <p>Дата</p>
-        <p>Статус</p>
-        <p>Тип</p>
-        <p>Категория</p>
-        <p>Сумма</p>
-        <p>Комментарий</p>
+        <div class="records__header">
+            <div>Дата</div>
+            <div>Статус</div>
+            <div>Тип</div>
+            <div>Категория</div>
+            <div>Сумма</div>
+            <div>Комментарий</div>
+        </div>
+
+        {% for record in records %}
+        <div class="records__row">
+            <div>{{ record.date }}</div>
+            <div>{{ record.status }}</div>
+            <div>{{ record.type }}</div>
+            <div>{{ record.category }}/ {{record.subcategory}}</div>
+            <div>{{ record.sum }}</div>
+            <div>{{ record.comment }}</div>
+         <div class="records__actions">
+            <a href="{% url 'record_edit' record.id %}" class="button">Редактировать</a>
+            <form method="POST" action="{% url 'record_delete' record.id %}">
+                {% csrf_token %}
+                <button type="submit" class="button">
+                    Удалить
+                </button>
+            </form>
+        </div>
+        </div>
+        {% endfor %}
     </div>
+</div>
 {% endblock %}

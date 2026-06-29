@@ -7,7 +7,32 @@
 {% endblock %}
 
 {% block content%}
+
     <div class="container">
+        <section class="section">
+            <form method="POST" class="section__form">
+                <h2 class="section__title">Создать статус</h2>
+                {% csrf_token %}
+                <div>{{ status_form.name }}</div>
+                <button type="submit" name="add_status" class="section__button">Добавить</button>
+            </form>
+            <div class="section__list">
+                <h2 class="section__title">Список статусов</h2>
+
+                    {% for status in statuses%}
+                        <div class="section__list-element">
+                            <div class="section__list-element-title">{{ status.name }}</div>
+                            <div>
+                                <a href="{% url "status_edit" status.id %}" class="section__edit-button">Редактировать</a>
+                                <form method="POST" action="{% url 'status_delete' status.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="section__button">Удалить</button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+            </div>
+        </section>
         <section class="section">
             <form method="POST" class="section__form">
                 <h2 class="section__title">Создать тип</h2>
@@ -33,7 +58,7 @@
                     {% endfor %}
             </div>
         </section>
-        <section class="section">
+        <section class="section section--margin-left">
             <form method="POST" class="section__form">
                 <h2 class="section__title">Создать категорию</h2>
                 {% csrf_token %}

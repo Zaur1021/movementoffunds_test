@@ -4,7 +4,11 @@ from . import views
 urlpatterns = [
     path('', views.RecordsView.as_view(),name="records"),
     path('record_control/',views.RecordsControlView.as_view(),name="record_control"),
+    path('record_control/<int:id>/edit/',views.RecordEditView.as_view(),name="record_edit"),
+    path('record_control/<int:id>/delete/',views.RecordDeleteView.as_view(),name="record_delete"),
     path('catalog_control/',views.CatalogControlView.as_view(),name="catalog_control"),
+    path('catalog_control/status/<int:id>/edit/',views.StatusEditView.as_view(),name="status_edit"),
+    path('catalog_control/status/<int:id>/delete/',views.StatusDeleteView.as_view(),name="status_delete"),
     path('catalog_control/type/<int:id>/edit/',views.TypeEditView.as_view(),name="type_edit"),
     path('catalog_control/type/<int:id>/delete/',views.TypeDeleteView.as_view(),name="type_delete"),
     path('catalog_control/category/<int:id>/edit/',views.CategoryEditView.as_view(),name="category_edit"),

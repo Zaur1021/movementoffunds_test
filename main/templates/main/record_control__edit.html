@@ -1,0 +1,114 @@
+{% extends "main/bp.html" %}
+{% load static %}
+{% block link_style%} <link rel="stylesheet" href="{% static 'main/record_control__edit.css'%}"/> {% endblock%}
+
+{% block title %}
+Редактировать запись
+{% endblock %}
+    
+{% block content%}
+<form method="POST" class='form'>
+    {% csrf_token %}
+    <h2 class="form__title">Редактировать запись</h2>
+    <div class="form__box">
+        <label class="form__label">Дата</label>
+        {{ form.date }}
+    </div>
+    <div class="form__box">
+        <label class="form__label">Статус</label>
+        {{ form.status }}
+    </div>
+    <div class="form__box">
+        <label class="form__label">Тип</label>
+        {{ form.type }}
+    </div>
+    <div class="form__box" >
+        <label class="form__label">Категория</label>
+        {{ form.category }}
+    </div>
+    <div class="form__box">
+        <label class="form__label">Подкатегория</label>
+        {{ form.subcategory }}
+    </div>
+    <div class="form__box">
+        <label class="form__label">Сумма</label>
+        {{ form.sum }}
+    </div>
+    <div class="form__box">
+        <label class="form__label">Комментарий</label>
+        {{ form.comment }}
+    </div>
+    <div class="form__buttons">
+        <button type="submit" href="{% url "record_control" %}">Сохранить</button>
+        <a href="{% url 'record_control' %}">Назад</a>
+    </div>
+    </form>
+    <script>
+        const categories = {{ categories_json|safe}};
+        const subcategories = {{ subcategories_json|safe}};
+        const typesTag = document.getElementById('id_type');
+        const categoriesTag = document.getElementById('id_category');
+        const subcategoriesTag = document.getElementById('id_subcategory');
+        const type_Id  =  parseInt(typesTag.value)
+        const category_Id  =  parseInt(categoriesTag.value)
+        const selectedOptionType = categoriesTag.options[categoriesTag.selectedIndex];
+        const selectedOptionCategory = subcategoriesTag.options[subcategoriesTag.selectedIndex];
+        const selectedOptionId = parseInt(selectedOptionType.value)
+        const selectedOptionIdCategory = parseInt(selectedOptionCategory.value)
+        
+        categoriesTag.innerHTML = "<option value>------</option >";
+        subcategoriesTag.innerHTML = "<option value>------</option >";
+        
+        for (const category of categories){
+            if (type_Id === category.type_id){
+                const option = document.createElement('option');
+                if (category.id === selectedOptionId) {
+                    option.selected = true;
+                }
+                option.value = category.id;
+                option.textContent = category.name;
+                categoriesTag.appendChild(option);
+            }
+        }
+        for (const subcategory of subcategories){
+            if (category_Id === subcategory.category_id){
+                const option = document.createElement('option');
+                if (subcategory.id === selectedOptionIdCategory) {
+                    option.selected = true;
+                }
+                option.value = subcategory.id;
+                option.textContent = subcategory.name;
+                subcategoriesTag.appendChild(option);
+            }
+        }
+         
+        typesTag.addEventListener('change',function() {
+            categoriesTag.innerHTML = "<option value>------</option >";
+            subcategoriesTag.innerHTML = "<option value>------</option >";
+
+            const typeId  =  parseInt(typesTag.value)
+            categories
+                .filter(categ => categ.type_id === typeId)
+                .forEach(categ => {
+                    const option = document.createElement('option');
+                    option.value = categ.id;
+                    option.textContent = categ.name;
+                    categoriesTag.appendChild(option);
+                    });
+                })
+        categoriesTag.addEventListener('change',function() {
+            const categoryId  =  parseInt(categoriesTag.value)
+            subcategoriesTag.innerHTML = "<option value>------</option >";
+            
+
+            subcategories
+                .filter(subcateg => subcateg.category_id === categoryId)
+                .forEach(subcateg => {
+                    const option = document.createElement('option');
+                    option.value = subcateg.id;
+                    option.textContent = subcateg.name;
+                    subcategoriesTag.appendChild(option);
+                    });
+                })
+    </script>
+{% endblock%}

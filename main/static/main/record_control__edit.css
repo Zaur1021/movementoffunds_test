@@ -1,0 +1,45 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form__title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.form__box input,
+.form__box select,
+.form__box textarea {
+  border: 1px solid black;
+  font-size: 0.9rem;
+  width: 25rem;
+}
+.form__button {
+  border: black 1px solid;
+  width: 25rem;
+  background-color: #bdbdbd;
+}
+.form__box :disabled {
+  border:0.5px solid rgb(117, 117, 117)
+}
+.form__box {
+  display: flex;
+  flex-direction: column;  
+  gap: 0.2rem;
+}
+.form button, .form a {
+    display: block;
+    border:black 1px solid;
+    width: 100%;
+    background: #ededed;
+    padding: 0.2rem;
+}
+.form__buttons {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    padding: 0.2rem;
+    font-size: 1.1rem;
+}
