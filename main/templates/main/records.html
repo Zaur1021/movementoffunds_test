@@ -79,7 +79,7 @@
             <div>{{ record.type }}</div>
             <div>{{ record.category }}/ {{record.subcategory}}</div>
             <div>{{ record.sum }}</div>
-            <div>{{ record.comment }}</div>
+            <div class="records__comment">{{ record.comment }}</div>
          <div class="records__actions">
             <a href="{% url 'record_edit' record.id %}" class="button">Редактировать</a>
             <form method="POST" action="{% url 'record_delete' record.id %}">

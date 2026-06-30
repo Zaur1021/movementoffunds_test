@@ -59,3 +59,8 @@
 .filters a {
     padding: 8px 14px;
 }
+.records__comment {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
