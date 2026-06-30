@@ -94,7 +94,7 @@ class RecordDeleteView(View):
     def post(self,request,id):
         record_que = Record.objects.get(id=id)
         record_que.delete()
-        return redirect('record_control')
+        return redirect('records')
     
 class CatalogControlView(View):
     def get(self, request):

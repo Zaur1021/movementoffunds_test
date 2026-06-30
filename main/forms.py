@@ -34,7 +34,7 @@ class SubcategoryForm(forms.ModelForm):
 class RecordForm(forms.ModelForm):
     sum = forms.IntegerField(
         min_value=0,
-        max_value=100000
+        max_value=1000000000
     )
     class Meta:
         model = Record
